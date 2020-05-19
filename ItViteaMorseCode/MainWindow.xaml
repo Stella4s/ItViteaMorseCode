@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ItViteaMorseCode"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Morse Code Translator" Height="450" Width="600">
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+
+    </Window.Resources>
+
+    <Grid Background="WhiteSmoke">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Row="0" Grid.Column="0"/>
+            <TextBox Grid.Row="1" Grid.Column="0"/>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <ToggleButton Content="To Morse"/>
+                <Button Content="Clear"/>
+                <Button Content="Switch"/>
+                <Button Content="Translate"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
