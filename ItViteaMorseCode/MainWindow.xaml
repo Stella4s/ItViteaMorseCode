@@ -24,13 +24,13 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Row="0" Grid.Column="0"/>
-            <TextBox Grid.Row="1" Grid.Column="0"/>
+            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding TextBox1}" TextWrapping="Wrap"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding TextBox2}" TextWrapping="Wrap"/>
             <StackPanel Grid.Row="0" Grid.Column="1">
                 <ToggleButton Content="To Morse"/>
                 <Button Content="Clear"/>
                 <Button Content="Switch"/>
-                <Button Content="Translate"/>
+                <Button Content="Translate" Command="{Binding ToMorseCmd}"/>
             </StackPanel>
         </Grid>
     </Grid>
