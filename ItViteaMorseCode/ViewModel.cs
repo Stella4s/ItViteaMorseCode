@@ -13,6 +13,7 @@ namespace ItViteaMorseCode
     {
         //private variables for public properties.
         private string _TextBox1, _TextBox2;
+        private bool _TranslateToggle;
 
         //public variables.
         public TranslateMorse TLMorse;
@@ -41,6 +42,15 @@ namespace ItViteaMorseCode
                 OnPropertyChanged();
             }
         }
+        public bool TranslateToggle
+        {
+            get { return _TranslateToggle; }
+            set
+            {
+                _TranslateToggle = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region methods
@@ -48,6 +58,17 @@ namespace ItViteaMorseCode
         { 
             if (!string.IsNullOrEmpty(TextBox1))
             TextBox2 = TLMorse.ToMorse(TextBox1);
+        }
+        public void Switch()
+        {
+            string strTemp = TextBox1;
+            TextBox1 = TextBox2;
+            TextBox2 = strTemp;
+        }
+        public void Clear()
+        {
+            TextBox1 = "";
+            TextBox2 = "";
         }
         #endregion
 
@@ -63,6 +84,32 @@ namespace ItViteaMorseCode
                         p => ToMorse());
                 }
                 return _ToMorseCmd;
+            }
+        }
+        private ICommand _SwitchCmd;
+        public ICommand SwitchCmd
+        {
+            get
+            {
+                if (_SwitchCmd == null)
+                {
+                    _SwitchCmd = new RelayCommand(
+                        p => Switch());
+                }
+                return _SwitchCmd;
+            }
+        }
+        private ICommand _ClearCmd;
+        public ICommand ClearCmd
+        {
+            get
+            {
+                if (_ClearCmd == null)
+                {
+                    _ClearCmd = new RelayCommand(
+                        p => Clear());
+                }
+                return _ClearCmd;
             }
         }
         #endregion

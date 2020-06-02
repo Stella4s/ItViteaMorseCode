@@ -11,7 +11,15 @@
     </Window.DataContext>
     
     <Window.Resources>
-
+        <Style x:Key="ToggleBtnStyle1" TargetType="ToggleButton">
+            <Setter Property="Content" Value="To Morse"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="From Morse"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
     </Window.Resources>
 
     <Grid Background="WhiteSmoke">
@@ -27,11 +35,12 @@
             <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding TextBox1}" TextWrapping="Wrap"/>
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding TextBox2}" TextWrapping="Wrap"/>
             <StackPanel Grid.Row="0" Grid.Column="1">
-                <ToggleButton Content="To Morse"/>
-                <Button Content="Clear"/>
-                <Button Content="Switch"/>
-                <Button Content="Translate" Command="{Binding ToMorseCmd}"/>
+                <Button Content="Clear"      Command="{Binding ClearCmd}"    ToolTip="Clears all text from both boxes."/>
+                <Button Content="Switch"     Command="{Binding SwitchCmd}"   ToolTip="Switches text of top and bottom box."/>
+                <ToggleButton IsChecked="{Binding TranslateToggle}" ToolTip="Toggles between translating to and from Morse." Style="{DynamicResource ToggleBtnStyle1}"/>
+                <Button Content="Translate"  Command="{Binding ToMorseCmd}"  ToolTip="Translates input top box and puts result below."/>
             </StackPanel>
+            <TextBlock Grid.Row="1" Grid.Column="1"  Text="Information:" TextWrapping="Wrap" Margin="5"/>
         </Grid>
     </Grid>
 </Window>
