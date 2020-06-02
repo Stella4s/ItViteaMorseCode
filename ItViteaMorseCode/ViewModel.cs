@@ -59,6 +59,11 @@ namespace ItViteaMorseCode
             if (!string.IsNullOrEmpty(TextBox1))
             TextBox2 = TLMorse.ToMorse(TextBox1);
         }
+        public void FromMorse()
+        {
+            if (!string.IsNullOrEmpty(TextBox1))
+                TextBox2 = TLMorse.FromMorse(TextBox1);
+        }
         public void Switch()
         {
             string strTemp = TextBox1;
@@ -84,6 +89,19 @@ namespace ItViteaMorseCode
                         p => ToMorse());
                 }
                 return _ToMorseCmd;
+            }
+        }
+        private ICommand _FromMorseCmd;
+        public ICommand FromMorseCmd
+        {
+            get
+            {
+                if (_FromMorseCmd == null)
+                {
+                    _FromMorseCmd = new RelayCommand(
+                        p => FromMorse());
+                }
+                return _FromMorseCmd;
             }
         }
         private ICommand _SwitchCmd;

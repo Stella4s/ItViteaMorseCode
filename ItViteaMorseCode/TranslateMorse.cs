@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ItViteaMorseCode
@@ -99,7 +100,7 @@ namespace ItViteaMorseCode
 
         public string ToMorse(string input)
         {
-            string output = "", value = "";
+            string output = "";
             //Changes input string to uppercase, then array so it can be used to get dictionary entries.
             char[] charArr = input.ToUpper().ToCharArray();
 
@@ -107,7 +108,7 @@ namespace ItViteaMorseCode
             //If the key can't be found, put # instead for unrecognised char. (To prevent crashing if the user adds unrecognisable characters.)
             foreach (char c in charArr)
             {
-                if (dictToMorse.TryGetValue(c, out value))
+                if (dictToMorse.TryGetValue(c, out string value))
                     output += value + " ";
                 else
                     output += "#" + " ";
@@ -117,7 +118,18 @@ namespace ItViteaMorseCode
 
         public string FromMorse(string input)
         {
-            string output = "", value = "";
+            string output = "", pattern = @"([-.]+)\s(\s)*";
+
+            foreach (string result in Regex.Split(input, pattern))
+            {
+                if (!string.IsNullOrEmpty(result))
+                {
+                    if (dictFromMorse.TryGetValue(result, out char value))
+                        output += value;
+                    else
+                        output += "#";
+                }
+            }
             return output;
         }
     }
